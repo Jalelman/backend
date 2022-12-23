@@ -46,10 +46,30 @@ var express = require('express');
 const {getAllInstitut, getInstitut, createInstitut, updateInstitut, deleteInstitut} = require('../controllers/institut.controllers');
 // const validate = require('../middlewares/validator');
 var router = express.Router();
+var multer= require('multer');
+var multer = require("multer");
+var store = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./app/uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "." + file.originalname);
+  },
+});
+var upload = multer({
+  storage: store,
+}).single("file");
+router.post("/upload", upload, (req, res) => {
+    res.json({ file: req.file })
+});
+router.get("/download/:fileName", (req, res) => {
+    const {fileName} = req.params;
+    res.download("./app/uploads/" + fileName, fileName);
+});
 
 router.get('/fetch', getAllInstitut);
 router.get('/institut/:id', getInstitut);
-router.post('/add', createInstitut);
+router.post('/add', upload, createInstitut);
 router.put('/update/:id',updateInstitut);
 router.delete('/remove/:id', deleteInstitut);
 

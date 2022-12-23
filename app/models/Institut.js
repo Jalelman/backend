@@ -2,7 +2,6 @@ const Universite = require("./Universite");
 
 module.exports=(sequelize, Sequelize)=>{
     const Institut= sequelize.define('Institut',{
-
       
      nom:{
         type: Sequelize.STRING,
@@ -32,10 +31,23 @@ module.exports=(sequelize, Sequelize)=>{
       type: Sequelize.INTEGER,
 
    },
+   
+   file:{
+      type: Sequelize.STRING,
+
+   },
+
    nombreEtudiant:{
       type: Sequelize.INTEGER,
 
-   },  UniversiteId:{
+   }, 
+
+
+   image:{
+      type: Sequelize.STRING,
+   },
+   
+   UniversiteId:{
       type: Sequelize.INTEGER,
 
    },

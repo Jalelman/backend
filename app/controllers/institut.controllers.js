@@ -6,6 +6,7 @@ const createInstitut= ('/add', (req, res)=>{
     // const { nom, adresse,email,telephon,fax,UniversiteId} = req.body;
     // const univ =Universite.findOne({where:{nom:req.body.nom}})
     console.log(req.body);
+    console.log(req.file)
     let data = req.body;
     data.UniversiteId = parseInt(req.body.UniversiteId);
     db.Institut.create(req.body).then((response)=>{
